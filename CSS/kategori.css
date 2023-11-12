@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+.home {
+  background-image: url(../img/home.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 120vh;
+  color: white;
+  padding: 1% 10%;
+}
+
+.title {
+    text-align: center;
+    font-size: 3rem;
+}
+
+div .nama-kategori {
+    font-size: 1.3rem;
+    margin-left: 0px;
+}
+
+.container-buku {
+    width: 97%;
+    height: 30vh;
+    display: flex;
+    margin-bottom: 1rem;
+    padding: 0 2%;
+}
+
+.buku {
+    background: #fff;
+    height: 65%;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 13vh auto -12vh;
+    flex-direction: column;
+
+}
+
+.buku img {
+    width: 75px;
+    height: 125px;
+}
+
+.tombol-buku {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    transition: all 0.4s;
+}
+.tombol-buku:hover {
+    color: gray;
+}
+
+div .nama-kategori2 {
+    font-size: 1.3rem;
+    margin-left: 0px;
+}
+
+.buku2 {
+    background: #fff;
+    height: 65%;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 7vh auto -6vh;
+    flex-direction: column;
+
+}
+
+.buku2 img {
+    width: 75px;
+    height: 125px;
+}
+
+.buku3 {
+    background: #fff;
+    height: 65%;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 11vh auto -10vh;
+    flex-direction: column;
+
+}
+
+.buku3 img {
+    width: 75px;
+    height: 125px;
+}

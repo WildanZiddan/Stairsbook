@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  overflow-X: hidden;
+  background-image: url(../img/home.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+/* ----- GALERI ----- */
+.gallery-container{
+    text-align: center;
+    margin-top: -25px;
+    width: 100%;
+    height: 100vh;
+}
+.gallery-container h1 {
+    font-size: 60px;
+}
+.gallery-pict{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 70%;
+}
+.gallery-pict img {
+    margin: 0 auto;
+    width: 350px;
+    height: 500px;
+}
+
+/* ----- BERITA ----- */
+.berita-container{
+    text-align: center;
+    margin-top: -25px;
+    width: 100%;
+    height: 100vh;
+}
+.berita-container h1 {
+    font-size: 60px;
+}
+.berita-pict{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background-image: url(../img/berita1.png);
+    width: 70%;
+    height: 500px;
+}
+.berita-pict h2{
+    font-size: 60px;
+    color: #fff;
+}
+/* ----- NOTIF ----- */
+.notif-container{
+    text-align: center;
+    margin-top: -25px;
+    width: 100%;
+    height: 100vh;
+}
+.notif-container h1 {
+    font-size: 60px;
+}
+.notif-pict{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background-image: url(../img/notif1.png);
+    width: 70%;
+    height: 500px;
+}
+.notif-pict h2{
+    font-size: 60px;
+    color: #fff;
+}
