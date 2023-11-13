@@ -5,7 +5,7 @@ $images = mysqli_query($connection, "SELECT * FROM buku");
 
 // Create a new record
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add"])) {
-    $targetDirectory = "Cover/"; // The directory where you want to store uploaded images
+    $targetDirectory = "Buku/"; // The directory where you want to store uploaded images
     $targetFile = $targetDirectory . basename($_FILES["cover"]["name"]);
     $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/' . $targetFile;
     $deskripsi = $_POST["deskripsi"];
@@ -71,7 +71,20 @@ if (isset($_GET["delete_id"])) {
         <tbody>
         <?php while( $row = mysqli_fetch_assoc($result) ): ?>
         <tr>
-            <td><?= $row["Cover"]; ?></td>
+            <td><?php
+                    if (!empty($row["Cover"])) {
+                        $imagePath = 'Buku/' . $row["Cover"];
+                        
+                        // Check if the image file exists
+                        if (file_exists($imagePath)) {
+                            echo '<img src="' . $imagePath . '" alt="' . $row["Judul_Buku"] . '" style="max-width: 100px;">';
+                        } else {
+                            echo 'Image not found: ' . $imagePath;
+                        }
+                    } else {
+                        echo 'No Image';
+                    }
+                    ?></td>
             <td><?= $row["Deskripsi"]; ?></td>
             <td><?= $row["Judul_Buku"]; ?></td>
             <td><?= $row["Tahun_Buku"]; ?></td>
