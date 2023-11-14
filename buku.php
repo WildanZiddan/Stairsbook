@@ -1,23 +1,27 @@
 <?php
 require "connection.php";
 $result = mysqli_query($connection, "SELECT * FROM buku");
-$images = mysqli_query($connection, "SELECT * FROM buku");
 
 // Create a new record
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add"])) {
-    $targetDirectory = "Buku/"; // The directory where you want to store uploaded images
-    $targetFile = $targetDirectory . basename($_FILES["cover"]["name"]);
-    $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/' . $targetFile;
+    $cover = $_FILES ["cover"];
+    $cover_loc = $_FILES ["cover"]["tmp_name"];
+    $cover_name = $_FILES ["cover"]["name"];
+    $cover_des = "Buku/" .$cover_name;
     $deskripsi = $_POST["deskripsi"];
     $judul_buku = $_POST["judul_buku"];
     $tahun_buku = $_POST["tahun_buku"];
     $kategori = $_POST["kategori"];
-    $image_name = $_FILES["cover"]["name"];
 
-    $sql = "INSERT INTO buku (Cover, file_path, Deskripsi, Judul_Buku, Tahun_Buku, Kategori) VALUES ('$image_name', '$absolutePath', '$deskripsi', '$judul_buku', '$tahun_buku', '$kategori')";
-    mysqli_query($connection, $sql);
+    mysqli_query($connection, "INSERT INTO buku (Cover, Deskripsi, Judul_Buku, Tahun_Buku, Kategori) VALUES ('$cover_des', '$deskripsi', '$judul_buku', '$tahun_buku', '$kategori')");
 
-    move_uploaded_file($_FILES["cover"]["tmp_name"], $targetFile);
+    move_uploaded_file($cover_loc, 'Buku/'.$cover_name);
+
+    function is_image($file) {
+        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        return in_array($ext, $imageExtensions);
+    }
 }
 
 // Delete a record
@@ -69,32 +73,24 @@ if (isset($_GET["delete_id"])) {
         </thead>
         
         <tbody>
-        <?php while( $row = mysqli_fetch_assoc($result) ): ?>
+        <?php 
+            //while( $row = mysqli_fetch_assoc($result) ): 
+            include 'connection.php';
+            $pic = mysqli_query($connection, "SELECT * FROM buku");
+            while($row = mysqli_fetch_array($pic)) {
+        ?>
         <tr>
-            <td><?php
-                    if (!empty($row["Cover"])) {
-                        $imagePath = 'Buku/' . $row["Cover"];
-                        
-                        // Check if the image file exists
-                        if (file_exists($imagePath)) {
-                            echo '<img src="' . $imagePath . '" alt="' . $row["Judul_Buku"] . '" style="max-width: 100px;">';
-                        } else {
-                            echo 'Image not found: ' . $imagePath;
-                        }
-                    } else {
-                        echo 'No Image';
-                    }
-                    ?></td>
+            <td><img src="<?= $row['Cover'] ?>" alt="" width="70px" height="120px"></td>
             <td><?= $row["Deskripsi"]; ?></td>
             <td><?= $row["Judul_Buku"]; ?></td>
             <td><?= $row["Tahun_Buku"]; ?></td>
             <td><?= $row["Kategori"]; ?></td>
             <td>
-                <a href="update.php?edit_id=<?= $row['id_buku'] ?>">Edit</a>
-                <a href="?delete_id=<?= $row['id_buku'] ?>">Hapus</a>
+                <a href="update.php? id_buku=<?= $row['id_buku'] ?>">Edit</a>
+                <a href="delete.php? id_buku=<?= $row['id_buku'] ?>">Hapus</a>
             </td>
         </tr>
-        <?php endwhile; ?>
+        <?php } ?>
         </tbody>
     </table>
 </body>
